@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "dgSpecHash": "x8qDFkr76Uw=",
+  "success": true,
+  "projectFilePath": "C:\\9. MVC\\BackOffice\\BackOffice\\BackOffice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.bcl.cryptography\\9.0.18\\microsoft.bcl.cryptography.9.0.18.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.data.sqlclient\\7.1.1\\microsoft.data.sqlclient.7.1.1.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.data.sqlclient.extensions.abstractions\\7.1.1\\microsoft.data.sqlclient.extensions.abstractions.7.1.1.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.data.sqlclient.internal.logging\\7.1.1\\microsoft.data.sqlclient.internal.logging.7.1.1.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\7.1.0\\microsoft.data.sqlclient.sni.runtime.7.1.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore\\10.0.13\\microsoft.entityframeworkcore.10.0.13.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\10.0.13\\microsoft.entityframeworkcore.abstractions.10.0.13.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\10.0.13\\microsoft.entityframeworkcore.analyzers.10.0.13.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\10.0.13\\microsoft.entityframeworkcore.relational.10.0.13.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\10.0.13\\microsoft.entityframeworkcore.sqlserver.10.0.13.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.16.0\\microsoft.identitymodel.abstractions.8.16.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.16.0\\microsoft.identitymodel.jsonwebtokens.8.16.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.logging\\8.16.0\\microsoft.identitymodel.logging.8.16.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.protocols\\8.16.0\\microsoft.identitymodel.protocols.8.16.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\8.16.0\\microsoft.identitymodel.protocols.openidconnect.8.16.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.16.0\\microsoft.identitymodel.tokens.8.16.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.configuration.configurationmanager\\9.0.18\\system.configuration.configurationmanager.9.0.18.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.16.0\\system.identitymodel.tokens.jwt.8.16.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.18\\system.security.cryptography.pkcs.9.0.18.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.18\\system.security.cryptography.protecteddata.9.0.18.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "套件 'System.Security.Cryptography.Pkcs' 9.0.18 具有已知的 中度 嚴重性弱點，https://github.com/advisories/GHSA-2fmv-rv2c-59x7。",
+      "projectPath": "C:\\9. MVC\\BackOffice\\BackOffice\\BackOffice.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\9. MVC\\BackOffice\\BackOffice\\BackOffice.csproj",
+      "libraryId": "System.Security.Cryptography.Pkcs",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "套件 'System.Security.Cryptography.Pkcs' 9.0.18 具有已知的 高 嚴重性弱點，https://github.com/advisories/GHSA-846f-f764-76mx。",
+      "projectPath": "C:\\9. MVC\\BackOffice\\BackOffice\\BackOffice.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\9. MVC\\BackOffice\\BackOffice\\BackOffice.csproj",
+      "libraryId": "System.Security.Cryptography.Pkcs",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}

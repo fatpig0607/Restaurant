@@ -1,0 +1,10 @@
+# .NET 編譯產生的檔案
+bin/
+obj/
+
+# Visual Studio 個人設定
+.vs/
+
+# 使用者個人設定
+*.user
+*.suo

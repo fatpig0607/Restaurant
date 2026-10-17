@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BackOffice.Areas.Setting.Models.Role>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>角色管理</h1>
+
+<p>
+    <a asp-area="Setting"
+   asp-controller="Role"
+   asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.role_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updated_at)
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.role_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.created_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.updated_at)
+                </td>
+                <td class="d-flex">
+                    <a asp-action="Edit" asp-route-id="@item.role_id" class="btn btn-primary m-1">編輯</a>
+                    <form asp-action="Delete" asp-route-id="@item.role_id" method="post" onsubmit="send(event)">
+                        <button type="submit" class="btn btn-danger">刪除</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+
+<script>
+    let m ='@Html.Raw(TempData["Message"])'
+    if (m){
+        alert (m);
+    }
+    function send(e){
+        if(!confirm('確定要刪除嗎?')){
+            e.preventDefault();
+        }
+    }
+</script>
+}

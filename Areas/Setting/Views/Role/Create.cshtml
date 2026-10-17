@@ -1,0 +1,54 @@
+@model BackOffice.Areas.Setting.Models.Role
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Role</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="role_name" class="control-label"></label>
+                <input asp-for="role_name" class="form-control" max="10"/>
+                <span asp-validation-for="role_name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" max="100" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+
+<script>
+    let s = @(TempData["Success"]?.ToString().ToLower()??"false");
+    let m = '@Html.Raw(TempData["Message"])';
+    if (m){
+        alert(m);
+        if(s){
+            window.location.href='@Url.Action("index")';
+        }
+    }
+
+</script>
+}
