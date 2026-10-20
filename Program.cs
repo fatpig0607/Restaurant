@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("backoffice")));
-builder.Services.AddScoped<RoleRepository, roleService>();
+builder.Services.AddScoped<IRoleRepository, RoleService>();
+builder.Services.AddScoped<IUserRepository, UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

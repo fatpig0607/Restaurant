@@ -9,7 +9,7 @@
 <p>
     <a asp-area="Setting"
    asp-controller="Role"
-   asp-action="Create">Create New</a>
+   asp-action="Create" class="btn btn-warning">新增</a>
 </p>
 <table class="table">
     <thead>
@@ -45,7 +45,7 @@
                 <td>
                     @Html.DisplayFor(model => item.updated_at)
                 </td>
-                <td class="d-flex">
+                <td class="d-flex align-items-center">
                     <a asp-action="Edit" asp-route-id="@item.role_id" class="btn btn-primary m-1">編輯</a>
                     <form asp-action="Delete" asp-route-id="@item.role_id" method="post" onsubmit="send(event)">
                         <button type="submit" class="btn btn-danger">刪除</button>

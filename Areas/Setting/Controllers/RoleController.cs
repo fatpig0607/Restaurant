@@ -8,8 +8,8 @@ namespace BackOffice.Areas.Setting.Controllers
     [Area("Setting")]
     public class RoleController : Controller
     {
-        private RoleRepository _role;
-        public RoleController(RoleRepository role)
+        private IRoleRepository _role;
+        public RoleController(IRoleRepository role)
         {
             _role = role;
         }
@@ -52,7 +52,7 @@ namespace BackOffice.Areas.Setting.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            ServiceResult result = _role.delete(id);
+            ServiceResult result = _role.Delete(id);
             //TempData["Success"] = result.success;
             TempData["Message"] = result.message;
             return RedirectToAction("index");

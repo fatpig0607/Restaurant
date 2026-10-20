@@ -1,0 +1,56 @@
+@model BackOffice.Areas.Setting.Models.User
+@using System.Text.Json;
+@{
+    ViewData["Title"] = "Edit";
+}
+@{
+    Layout="~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Edit</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="user_id"/>
+
+            <div class="my-3">
+                <label asp-for="password_hash" class="form-label"></label>
+                <input asp-for="password_hash" class="form-control" maxlength="255"/>
+                <span asp-validation-for="password_hash" class="text-danger"></span>
+            </div>
+            <div class="my-3 w-50">
+                <label asp-for="status" class="form-label">帳號狀態</label>
+                <select asp-for="status" class="form-select">
+                    <option value="1">啟用</option>
+                    <option value="0">未啟用</option>
+                </select>
+            </div>
+            <div class="my-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    let s = @(JsonSerializer.Serialize(TempData["Success"]));
+    let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+    if (m){
+        alert (m);
+        if (s){
+            window.location.href='@Url.Action("Index")';
+        }
+    }
+</script>
+}

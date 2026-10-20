@@ -1,0 +1,54 @@
+@using System.Text.Json;
+@model BackOffice.Areas.Setting.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="my-3">
+                <label asp-for="user_name" class="form-label"></label>
+                <input asp-for="user_name" class="form-control" maxlength="20"/>
+                <span asp-validation-for="user_name" class="text-danger"></span>
+            </div>
+
+            <div class="my-3">
+                <label asp-for="password_hash" class="form-label"></label>
+                <input asp-for="password_hash" class="form-control" maxlength="255"/>
+                <span asp-validation-for="password_hash" class="text-danger"></span>
+            </div>
+
+            <div class="my-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts{
+<script>
+    let s=@(JsonSerializer.Serialize(TempData["Success"]));
+    let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+    if (m){
+        alert(m);
+        if (s){
+            window.location.href='@Url.Action("Index")';
+        }
+    }
+</script>
+
+}

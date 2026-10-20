@@ -1,0 +1,88 @@
+﻿@model IEnumerable<BackOffice.Areas.Setting.Models.User>
+@using System.Text.Json;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>帳號管理</h1>
+
+<p>
+    <a asp-area="Setting"
+   asp-controller="User"
+   asp-action="Create" class="btn btn-warning">新增</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.user_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.created_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updated_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_login_at)
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.user_name)
+                </td>
+                <td>
+                    @if (item.status == 1)
+                    {
+                        @: 啟用
+                    }
+                    else
+                    {
+                        @: 未啟用
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.created_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.updated_at)
+                </td>
+                <td>
+                    @if (item.last_login_at==null){
+                        @:尚未登入
+                    }else{
+                    @Html.DisplayFor(model => item.last_login_at)
+                    }
+                </td>
+                <td class="d-flex align-items-center">
+                    <a asp-action="Edit" asp-route-id="@item.user_id" class="btn btn-primary m-1">編輯</a>
+                    <form asp-action="Delete" asp-route-id="@item.user_id" method="post" onsubmit="send(event)">
+                        <button type="submit" class="btn btn-danger">刪除</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+
+<script>
+    let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+    if (m){
+        alert(m);
+    }
+    function send(e){
+            if (!confirm('確定要刪除嗎?')){
+                e.preventDefault();
+            }
+    }
+</script>
+} 

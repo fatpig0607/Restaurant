@@ -16,18 +16,18 @@
         <form asp-action="Edit" method="POST">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="role_id" />
-            <div class="form-group">
-                <label asp-for="role_name" class="control-label"></label>
-                <input asp-for="role_name" class="form-control" max="10"/>
+            <div class="my-3">
+                <label asp-for="role_name" class="form-label"></label>
+                <input asp-for="role_name" class="form-control" maxlength="10"/>
                 <span asp-validation-for="role_name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="description" class="control-label"></label>
-                <input asp-for="description" class="form-control" max="100"/>
+            <div class="my-3">
+                <label asp-for="description" class="form-label"></label>
+                <input asp-for="description" class="form-control" maxlength="100"/>
                 <span asp-validation-for="description" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="my-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

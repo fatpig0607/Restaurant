@@ -3,19 +3,26 @@ using BackOffice.Models;
 
 namespace BackOffice.Areas.Setting.Models.Service
 {
-    public class roleService : RoleRepository
+    public class RoleService : IRoleRepository
     {
         private RestaurantDbContext _dbContext;
-        public roleService(RestaurantDbContext dbContext)
+        public RoleService(RestaurantDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public ServiceResult delete(int id)
+        public ServiceResult Delete(int id)
         {
             var q = _dbContext.roles.FirstOrDefault(r => r.role_id == id);
-            _dbContext.roles.Remove(q);
-            _dbContext.SaveChanges();
-            return new ServiceResult { success = false, message = "成功刪除指定角色!" };
+            if (q != null)
+            {
+                _dbContext.roles.Remove(q);
+                _dbContext.SaveChanges();
+                return new ServiceResult { success = true, message = "成功刪除指定角色" };
+            }
+            else
+            {
+                return new ServiceResult { success = false, message = "無指定角色" };
+            }
         }
 
         public IEnumerable<Role> GetAll()
@@ -51,7 +58,7 @@ namespace BackOffice.Areas.Setting.Models.Service
 
             _dbContext.roles.Add(r);
             _dbContext.SaveChanges();
-            return new ServiceResult { success = true, message = "角色新增成功!" };
+            return new ServiceResult { success = true, message = "角色新增成功" };
         }
 
         public ServiceResult Update(Role role)
@@ -75,7 +82,7 @@ namespace BackOffice.Areas.Setting.Models.Service
             }
             else
             {
-                return new ServiceResult { success = false, message = "無此角色ID" };
+                return new ServiceResult { success = false, message = "無此角色名稱" };
             }
         }
     }

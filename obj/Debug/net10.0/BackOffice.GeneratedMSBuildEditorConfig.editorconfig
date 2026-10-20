@@ -35,6 +35,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xSb2xlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/9. MVC/BackOffice/BackOffice/Areas/Setting/Views/User/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xVc2VyXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/9. MVC/BackOffice/BackOffice/Areas/Setting/Views/User/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xVc2VyXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/9. MVC/BackOffice/BackOffice/Areas/Setting/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xVc2VyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/9. MVC/BackOffice/BackOffice/Areas/Setting/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
