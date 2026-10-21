@@ -17,18 +17,29 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="user_id"/>
-
+            <div class="my-3">
+                <label asp-for="user_name" class="form-label"></label>
+                <input asp-for="user_name" class="form-control" maxlength="20" disabled/>
+                <span asp-validation-for="user_name" class="text-danger"></span>
+            </div>
             <div class="my-3">
                 <label asp-for="password_hash" class="form-label"></label>
                 <input asp-for="password_hash" class="form-control" maxlength="255"/>
                 <span asp-validation-for="password_hash" class="text-danger"></span>
             </div>
-            <div class="my-3 w-50">
+            <div class="my-3">
                 <label asp-for="status" class="form-label">帳號狀態</label>
                 <select asp-for="status" class="form-select">
                     <option value="1">啟用</option>
                     <option value="0">未啟用</option>
                 </select>
+            </div>
+            <div class="my-3">
+                <label asp-for="role_id" class="form-label">角色</label>
+                <select asp-for="role_id" class="form-select" asp-items="ViewBag.RoleList">
+                    <option value=""  hidden>請選擇角色</option>
+                </select>
+                <span asp-validation-for="role_id" class="text-danger"></span>
             </div>
             <div class="my-3">
                 <input type="submit" value="Save" class="btn btn-primary" />

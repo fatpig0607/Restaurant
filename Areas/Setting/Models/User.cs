@@ -20,6 +20,7 @@ namespace BackOffice.Areas.Setting.Models
         public DateTime updated_at { get; set; }
         [Display(Name = "最後登入時間")]
         public DateTime? last_login_at { get; set; }
+        [Display(Name ="角色名稱")]
         public int? role_id { get; set; }
     }
 }

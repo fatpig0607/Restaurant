@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BackOffice.Areas.Setting.Models.User>
+﻿@model IEnumerable<BackOffice.Areas.Setting.Models.ViewModel.UserIndexViewModel>
 @using System.Text.Json;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,6 +28,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.last_login_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.role_name)
             </th>
             <th>操作</th>
         </tr>
@@ -61,6 +64,9 @@
                     }else{
                     @Html.DisplayFor(model => item.last_login_at)
                     }
+                </td>
+                <td>
+                    @Html.DisplayFor(model=>item.role_name)
                 </td>
                 <td class="d-flex align-items-center">
                     <a asp-action="Edit" asp-route-id="@item.user_id" class="btn btn-primary m-1">編輯</a>

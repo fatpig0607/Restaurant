@@ -3,6 +3,7 @@ using BackOffice.Areas.Setting.Models.Service.Repository;
 using BackOffice.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
 
 namespace BackOffice.Areas.Setting.Controllers
@@ -17,15 +18,21 @@ namespace BackOffice.Areas.Setting.Controllers
         }
         public IActionResult Index()
         {
-            return View(_user.GetAll());
+            return View(_user.GetUserList());
         }
         public IActionResult Create()
         {
+            var roles=_user.GetRoles();
+            ViewBag.RoleList = new SelectList(roles, "role_id", "role_name");
             return View();
         }
         [HttpPost]
         public IActionResult Create(User user)
         {
+            var roles = _user.GetRoles();
+            ViewBag.RoleList = new SelectList(roles,"role_id","role_name");//讓了讓post送出時，背景的角色選單維持一致
+
+
             ServiceResult result = _user.Create(user);
             TempData["Success"] = result.success;
             TempData["Message"] = result.message;
@@ -33,11 +40,17 @@ namespace BackOffice.Areas.Setting.Controllers
         }
         public IActionResult Edit(int id)
         {
+            var roles = _user.GetRoles();
+            ViewBag.RoleList = new SelectList(roles, "role_id", "role_name");
             return View(_user.GetById(id));
         }
         [HttpPost]
         public IActionResult Edit(User user)
         {
+            var roles = _user.GetRoles();
+            ViewBag.RoleList = new SelectList(roles, "role_id", "role_name");//讓了讓post送出時，背景的角色選單維持一致
+
+
             ServiceResult result = _user.Update(user);
             TempData["Success"] = result.success;
             TempData["Message"] = result.message;

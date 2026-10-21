@@ -1,4 +1,5 @@
 ﻿using BackOffice.Areas.Setting.Models.Service.Repository;
+using BackOffice.Areas.Setting.Models.ViewModel;
 using BackOffice.Models;
 
 namespace BackOffice.Areas.Setting.Models.Service
@@ -18,6 +19,9 @@ namespace BackOffice.Areas.Setting.Models.Service
             }
             else if(_dbContext.users.Any(u=>u.user_name.Trim()==user.user_name.Trim())){
                 return new ServiceResult { success = false, message = "已存在相同的帳號" };
+            }else if (!_dbContext.roles.Any(r=>r.role_id==user.role_id))
+            {
+                return new ServiceResult { success = false, message = "不存在的角色" };
             }
             var u = new User
             {
@@ -26,6 +30,7 @@ namespace BackOffice.Areas.Setting.Models.Service
                 status = 1,
                 created_at = DateTime.Now,
                 updated_at = DateTime.Now,
+                role_id=user.role_id
             };
             _dbContext.users.Add(u);
             _dbContext.SaveChanges();
@@ -47,11 +52,11 @@ namespace BackOffice.Areas.Setting.Models.Service
             }
         }
 
-        public IEnumerable<User> GetAll()
-        {
-            var users = _dbContext.users.ToList();
-            return users;
-        }
+        //public IEnumerable<User> GetAll()
+        //{
+        //    var users = _dbContext.users.ToList();
+        //    return users;
+        //}
 
         public User GetById(int id)
         {
@@ -65,6 +70,10 @@ namespace BackOffice.Areas.Setting.Models.Service
             {
                 return new ServiceResult { success = false, message = "密碼不得為空" };
             }
+            else if (!_dbContext.roles.Any(r=>r.role_id==user.role_id))
+            {
+                return new ServiceResult { success = false, message = "不存在的角色" };
+            }
             
             var u = _dbContext.users.FirstOrDefault(u => u.user_id == user.user_id);
             if (u != null)
@@ -72,6 +81,7 @@ namespace BackOffice.Areas.Setting.Models.Service
                 u.password_hash= user.password_hash;
                 u.status=user.status;
                 u.updated_at = DateTime.UtcNow;
+                u.role_id=user.role_id;
                 _dbContext.SaveChanges();
                 return new ServiceResult { success = true, message = "帳號更新成功" };
             }
@@ -79,6 +89,28 @@ namespace BackOffice.Areas.Setting.Models.Service
             {
                 return new ServiceResult { success = false, message = "無指定帳號" };
             }
+        }
+        public IEnumerable<Role> GetRoles()
+        {
+            return _dbContext.roles.ToList();
+        }
+        public IEnumerable<UserIndexViewModel> GetUserList()
+        {
+            var users = from u in _dbContext.users
+                        join r in _dbContext.roles
+                        on u.role_id equals r.role_id
+                        select new UserIndexViewModel
+                        {
+                            user_id=u.user_id,
+                            user_name = u.user_name,
+                            status = u.status,
+                            created_at = u.created_at,
+                            updated_at = u.updated_at,
+                            last_login_at = u.last_login_at,
+                            role_id = u.role_id,
+                            role_name = r.role_name
+                        };
+            return users.ToList();
         }
     }
 }
