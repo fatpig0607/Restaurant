@@ -1,0 +1,61 @@
+﻿@model BackOffice.Areas.Setting.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+            body {
+                font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif;
+                background-color: #f3f4f6;
+                color: #1f2937;
+            }
+
+            .login-card {
+                background-color: #e9ecef;
+                border: 1px solid #d1d5db;
+                border-radius: 16px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            }
+
+            .form-control::placeholder {
+                color: #6b7280;
+            }
+    </style>
+    <title>登入</title>
+</head>
+
+<body>
+    <div class="container d-flex align-items-center justify-content-center" style="min-height:80vh">
+        <div class="row w-100 justify-content-center">
+            <div class="col-4 login-card p-4">
+
+                <h1>後台登入</h1>
+                <form asp-controller="Account" asp-action="Login" method="post" class="form">
+
+                    <div class="my-3">
+                        <label asp-for="user_name" class="form-label">帳號</label>
+                        <input type="text" asp-for="user_name" class="form-control" placeholder="請輸入帳號" />
+                    </div>
+                    <div class="my-3">
+                        <label asp-for="password_hash" class="form-label">密碼</label>
+                        <input type="password" asp-for="password_hash" class="form-control" placeholder="請輸入密碼" />
+                    </div>
+                    <button type="submit" class="btn btn-warning">登入</button>
+                    @if (ViewBag.LoginErr != null)
+                            {
+                                <div class="text text-danger">@ViewBag.LoginErr</div>
+                            }
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

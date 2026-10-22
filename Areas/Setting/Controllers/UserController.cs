@@ -36,7 +36,7 @@ namespace BackOffice.Areas.Setting.Controllers
             ServiceResult result = _user.Create(user);
             TempData["Success"] = result.success;
             TempData["Message"] = result.message;
-            return View(user);
+            return RedirectToAction();
         }
         public IActionResult Edit(int id)
         {

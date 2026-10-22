@@ -9,7 +9,8 @@ namespace BackOffice.Areas.Setting.Models
         [Required]
         [Display(Name ="帳號")]
         public string user_name { get; set; }
-        [Required]
+        [Required(ErrorMessage ="密碼不能為空")]
+        [StringLength(10,MinimumLength =4,ErrorMessage ="密碼需為4~10位數")]
         [Display(Name = "密碼")]
         public string password_hash { get; set; }
         [Display(Name = "狀態")]

@@ -112,5 +112,22 @@ namespace BackOffice.Areas.Setting.Models.Service
                         };
             return users.ToList();
         }
+
+        public User? ValidateLogin(string username, string password)
+        {
+            var user = _dbContext.users.FirstOrDefault(u => u.user_name == username.Trim() && u.status == 1);
+            if (user == null)
+            {
+                return null;
+            }
+            else if (user.password_hash!=password)
+            {
+                return null;
+            }
+            else
+            {
+                return user;
+            }
+        }
     }
 }

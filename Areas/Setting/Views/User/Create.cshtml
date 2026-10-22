@@ -14,7 +14,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post">
+        <form asp-action="Create" method="post" onsubmit="SaveForm()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="my-3">
@@ -50,9 +50,19 @@
 <script>
     let s=@(JsonSerializer.Serialize(TempData["Success"]));
     let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+    let InputUserName=document.getElementById("user_name");
+    let InputRoleID=document.getElementById("role_id")
+    function SaveForm(){
+        sessionStorage.setItem("user_name",InputUserName.value)
+        sessionStorage.setItem("role_id",InputRoleID.value)
+    }
     if (m){
+        InputUserName.value = sessionStorage.getItem("user_name");
+        InputRoleID.value = sessionStorage.getItem("role_id");
         alert(m);
         if (s){
+            sessionStorage.removeItem("user_name");
+            sessionStorage.removeItem("role_id");
             window.location.href='@Url.Action("Index")';
         }
     }

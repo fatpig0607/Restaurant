@@ -12,5 +12,6 @@ namespace BackOffice.Areas.Setting.Models.Service.Repository
         ServiceResult Delete(int id);
         IEnumerable<Role> GetRoles();
         IEnumerable<UserIndexViewModel> GetUserList();
+        User? ValidateLogin(string username, string password);
     }
 }

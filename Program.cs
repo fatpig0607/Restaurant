@@ -1,6 +1,7 @@
 using BackOffice.Areas.Setting.Models.Service;
 using BackOffice.Areas.Setting.Models.Service.Repository;
 using BackOffice.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("backoffice")));
 builder.Services.AddScoped<IRoleRepository, RoleService>();
 builder.Services.AddScoped<IUserRepository, UserService>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+    AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,7 +29,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

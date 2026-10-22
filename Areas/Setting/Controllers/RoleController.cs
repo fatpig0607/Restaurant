@@ -28,7 +28,7 @@ namespace BackOffice.Areas.Setting.Controllers
             ServiceResult result = _role.Create(role);
             TempData["Success"] = result.success;
             TempData["Message"] = result.message;
-            return View(role);
+            return RedirectToAction();
         }
         [HttpGet]
         public IActionResult Edit(int id)
@@ -41,7 +41,7 @@ namespace BackOffice.Areas.Setting.Controllers
             ServiceResult result = _role.Update(role);
             TempData["Success"] = result.success;
             TempData["Message"] = result.message;
-            return View(role);
+            return RedirectToAction();
         }
         [HttpGet]
         public IActionResult Details(int id)

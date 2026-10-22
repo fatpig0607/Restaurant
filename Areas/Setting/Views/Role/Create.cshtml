@@ -1,4 +1,5 @@
 @model BackOffice.Areas.Setting.Models.Role
+@using System.Text.Json;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,12 +13,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post">
+        <form asp-action="Create" method="post" onsubmit="SaveForm()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="my-3">
                 <label asp-for="role_name" class="form-label"></label>
-                <input asp-for="role_name" class="form-control" maxlength="10"/>
+                <input asp-for="role_name" class="form-control" maxlength="10" />
                 <span asp-validation-for="role_name" class="text-danger"></span>
             </div>
 
@@ -28,7 +29,7 @@
             </div>
             
             <div class="my-3">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -38,17 +39,27 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts{
+@section Scripts {
 
-<script>
-    let s = @(TempData["Success"]?.ToString().ToLower()??"false");
-    let m = '@Html.Raw(TempData["Message"])';
-    if (m){
-        alert(m);
-        if(s){
-            window.location.href='@Url.Action("index")';
+    <script>
+        let s = @(JsonSerializer.Serialize(TempData["Success"]));
+        let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+        let InputRoleName = document.getElementById("role_name");
+        let InputDescription = document.getElementById("description");
+        function SaveForm() {
+            sessionStorage.setItem("role_name", InputRoleName.value);
+            sessionStorage.setItem("description", InputDescription.value);
         }
-    }
+        if (m) {
+            InputRoleName.value = sessionStorage.getItem("role_name");
+            InputDescription.value = sessionStorage.getItem("description");
+            alert(m);
+            if (s) {
+                sessionStorage.removeItem("role_name");
+                sessionStorage.removeItem("description");
+                window.location.href = '@Url.Action("index")';
+            }
+        }
 
-</script>
+    </script>
 }
