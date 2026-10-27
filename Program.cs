@@ -1,7 +1,9 @@
+using BackOffice.Areas.Setting.Models;
 using BackOffice.Areas.Setting.Models.Service;
 using BackOffice.Areas.Setting.Models.Service.Repository;
 using BackOffice.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Account/Login";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     });
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

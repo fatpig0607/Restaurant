@@ -1,11 +1,13 @@
 ﻿using BackOffice.Areas.Setting.Models;
 using BackOffice.Areas.Setting.Models.Service.Repository;
 using BackOffice.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackOffice.Areas.Setting.Controllers
 {
     [Area("Setting")]
+    [Authorize]
     public class RoleController : Controller
     {
         private IRoleRepository _role;

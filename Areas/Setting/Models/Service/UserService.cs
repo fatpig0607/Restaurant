@@ -1,15 +1,18 @@
 ﻿using BackOffice.Areas.Setting.Models.Service.Repository;
 using BackOffice.Areas.Setting.Models.ViewModel;
 using BackOffice.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BackOffice.Areas.Setting.Models.Service
 {
     public class UserService : IUserRepository
     {
-         private RestaurantDbContext _dbContext;
-        public UserService(RestaurantDbContext dbContext) 
+        private RestaurantDbContext _dbContext;
+        private IPasswordHasher<User> _passwordhasher;
+        public UserService(RestaurantDbContext dbContext,IPasswordHasher<User> passwordHasher) 
         { 
             _dbContext = dbContext;
+            _passwordhasher = passwordHasher;
         }
         public ServiceResult Create(User user)
         {
@@ -26,12 +29,14 @@ namespace BackOffice.Areas.Setting.Models.Service
             var u = new User
             {
                 user_name = user.user_name.Trim(),
-                password_hash = user.password_hash,
+                //password_hash = user.password_hash,
                 status = 1,
                 created_at = DateTime.Now,
                 updated_at = DateTime.Now,
                 role_id=user.role_id
             };
+            u.password_hash = _passwordhasher.HashPassword(u, user.password_hash);
+            //HashPassword(要處理的使用者物件, 原始密碼)
             _dbContext.users.Add(u);
             _dbContext.SaveChanges();
             return new ServiceResult { success = true, message = "帳號新增成功" };
@@ -66,29 +71,33 @@ namespace BackOffice.Areas.Setting.Models.Service
 
         public ServiceResult Update(User user)
         {
-            if (string.IsNullOrWhiteSpace(user.password_hash))
-            {
-                return new ServiceResult { success = false, message = "密碼不得為空" };
-            }
-            else if (!_dbContext.roles.Any(r=>r.role_id==user.role_id))
+            if (!_dbContext.roles.Any(r=>r.role_id==user.role_id))
             {
                 return new ServiceResult { success = false, message = "不存在的角色" };
             }
             
             var u = _dbContext.users.FirstOrDefault(u => u.user_id == user.user_id);
+            
             if (u != null)
             {
-                u.password_hash= user.password_hash;
-                u.status=user.status;
-                u.updated_at = DateTime.UtcNow;
-                u.role_id=user.role_id;
-                _dbContext.SaveChanges();
-                return new ServiceResult { success = true, message = "帳號更新成功" };
-            }
-            else
-            {
-                return new ServiceResult { success = false, message = "無指定帳號" };
-            }
+                if (!string.IsNullOrWhiteSpace(user.password_hash))
+                {
+                    if(user.password_hash.Length<4 || user.password_hash.Length > 10)
+                    {
+                        return new ServiceResult { success = false, message = "密碼需在4~10位數" };
+                    }
+                    u.password_hash = _passwordhasher.HashPassword(u, user.password_hash);
+                 }
+                    u.status=user.status;
+                    u.updated_at = DateTime.UtcNow;
+                    u.role_id=user.role_id;
+                    _dbContext.SaveChanges();
+                    return new ServiceResult { success = true, message = "帳號更新成功" };
+                }
+                else
+                {
+                    return new ServiceResult { success = false, message = "無指定帳號" };
+                }
         }
         public IEnumerable<Role> GetRoles()
         {

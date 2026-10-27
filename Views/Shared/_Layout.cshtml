@@ -33,6 +33,17 @@
                             <a class="nav-link text-dark" asp-area="Setting" asp-controller="User" asp-action="Index">帳號管理</a>
                         </li>
                     </ul>
+                    <div>
+                        @if (User.Identity?.IsAuthenticated == true)
+                            {
+                                <div class="d-flex align-items-center gap-3"> 
+                                    <span>歡迎，@User.Identity?.Name</span>
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                                        <button type="submit" class="btn btn-outline-danger">登出</button>
+                                   </form>
+                                </div>
+                            }
+                    </div>
                 </div>
             </div>
         </nav>

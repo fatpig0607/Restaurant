@@ -1,7 +1,7 @@
 ﻿using BackOffice.Areas.Setting.Models;
 using BackOffice.Areas.Setting.Models.Service.Repository;
 using BackOffice.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
@@ -9,6 +9,7 @@ using System.Data;
 namespace BackOffice.Areas.Setting.Controllers
 {
     [Area("Setting")]
+    [Authorize]
     public class UserController : Controller
     {
         private IUserRepository _user;
@@ -16,6 +17,7 @@ namespace BackOffice.Areas.Setting.Controllers
         {
             _user= user;
         }
+
         public IActionResult Index()
         {
             return View(_user.GetUserList());

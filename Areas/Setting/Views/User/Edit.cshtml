@@ -18,13 +18,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="user_id"/>
             <div class="my-3">
-                <label asp-for="user_name" class="form-label"></label>
+                <label asp-for="user_name" class="form-label">帳號</label>
                 <input asp-for="user_name" class="form-control" maxlength="20" disabled/>
             </div>
             <div class="my-3">
-                <label asp-for="password_hash" class="form-label"></label>
-                <input asp-for="password_hash" class="form-control" maxlength="255"/>
-                <span asp-validation-for="password_hash" class="text-danger"></span>
+                <label for="password" class="form-label">密碼</label>
+                <input type="password" id="password" name="password_hash" class="form-control" maxlength="255"/>
             </div>
             <div class="my-3">
                 <label asp-for="status" class="form-label">帳號狀態</label>
