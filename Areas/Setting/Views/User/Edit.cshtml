@@ -14,7 +14,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" onsubmit="check(event)">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="user_id"/>
             <div class="my-3">
@@ -24,6 +24,7 @@
             <div class="my-3">
                 <label for="password" class="form-label">密碼</label>
                 <input type="password" id="password" name="password_hash" class="form-control" maxlength="255"/>
+                <div class="text-danger" id="password_hint"></div>
             </div>
             <div class="my-3">
                 <label asp-for="status" class="form-label">帳號狀態</label>
@@ -59,6 +60,20 @@
         alert (m);
         if (s){
             window.location.href='@Url.Action("Index")';
+        }
+    }
+    function check(e){
+        let password = $('#password');
+        let hint=$('#password_hint');
+        hint.text('');
+        let ruler = /^[!-~]{4,10}$/;
+        if (password.val().trim().length==0){
+            password.val('');
+            return;
+        }
+        if(!ruler.test(password.val())){
+            hint.text("密碼需為 4～10 個英文字母、數字或半形符號，且不得含空白");
+            e.preventDefault();
         }
     }
 </script>

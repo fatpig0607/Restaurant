@@ -1,4 +1,5 @@
 ﻿using BackOffice.Areas.Setting.Models.Service.Repository;
+using BackOffice.Areas.Setting.Models.ViewModel;
 using BackOffice.Models;
 
 namespace BackOffice.Areas.Setting.Models.Service
@@ -88,6 +89,24 @@ namespace BackOffice.Areas.Setting.Models.Service
             {
                 return new ServiceResult { success = false, message = "無此角色名稱" };
             }
+        }
+
+        public RolePermissionViewModel? GetPermissions(int roleId)
+        {
+            var role = _dbContext.roles.FirstOrDefault(r=>r.role_id==roleId);
+            if (role == null)
+            {
+                return null;
+            }
+            var permissions = _dbContext.permissions.OrderBy(p=>p.permission_id).ToList();
+            var selectedIds = _dbContext.roles_permissions.Where(r=>r.role_id==roleId).Select(rp=>rp.permission_id).ToList() ;
+            return new RolePermissionViewModel
+            {
+                role_id = role.role_id,
+                role_name = role.role_name,
+                permissions = permissions,
+                selected_permissions_ids = selectedIds
+            };
         }
     }
 }

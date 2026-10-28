@@ -1,4 +1,5 @@
-﻿using BackOffice.Models;
+﻿using BackOffice.Areas.Setting.Models.ViewModel;
+using BackOffice.Models;
 using System.Data;
 
 namespace BackOffice.Areas.Setting.Models.Service.Repository
@@ -10,6 +11,7 @@ namespace BackOffice.Areas.Setting.Models.Service.Repository
         ServiceResult Create(Role role);
         ServiceResult Update(Role role);
         ServiceResult Delete(int id);
+        RolePermissionViewModel? GetPermissions(int roleId);
     }
 
 }

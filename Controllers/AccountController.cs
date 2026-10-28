@@ -52,6 +52,8 @@ namespace BackOffice.Controllers
                 return RedirectToAction("Index","Home");
             }
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

@@ -59,5 +59,16 @@ namespace BackOffice.Areas.Setting.Controllers
             TempData["Message"] = result.message;
             return RedirectToAction("index");
         }
+        [HttpGet]
+        public IActionResult Permissions(int id)
+        {
+            var rp = _role.GetPermissions(id);
+            if (rp == null)
+            {
+                return NotFound();
+            }
+            return View(rp);
+
+        }
     }
 }

@@ -14,19 +14,19 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post" onsubmit="SaveForm()">
+        <form asp-action="Create" method="post" onsubmit="Check(event)">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="my-3">
                 <label asp-for="user_name" class="form-label"></label>
-                <input asp-for="user_name" class="form-control" maxlength="20"/>
-                <span asp-validation-for="user_name" class="text-danger"></span>
+                <input asp-for="user_name" class="form-control" maxlength="20" />
+                <div id="hintUserName" class="text-danger"></div>
             </div>
 
             <div class="my-3">
                 <label asp-for="password_hash" class="form-label"></label>
-                <input asp-for="password_hash" class="form-control" maxlength="255"/>
-                <span asp-validation-for="password_hash" class="text-danger"></span>
+                <input type="password" asp-for="password_hash" class="form-control" maxlength="255" />
+                <div id="hintPassword" class="text-danger"></div>
             </div>
 
             <div class="my-3">
@@ -46,26 +46,48 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-@section Scripts{
-<script>
-    let s=@(JsonSerializer.Serialize(TempData["Success"]));
-    let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
-    let InputUserName=document.getElementById("user_name");
-    let InputRoleID=document.getElementById("role_id")
-    function SaveForm(){
-        sessionStorage.setItem("user_name",InputUserName.value)
-        sessionStorage.setItem("role_id",InputRoleID.value)
-    }
-    if (m){
-        InputUserName.value = sessionStorage.getItem("user_name");
-        InputRoleID.value = sessionStorage.getItem("role_id");
-        alert(m);
-        if (s){
-            sessionStorage.removeItem("user_name");
-            sessionStorage.removeItem("role_id");
-            window.location.href='@Url.Action("Index")';
+@section Scripts {
+    <script>
+        let s =@(JsonSerializer.Serialize(TempData["Success"]));
+        let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+        let InputUserName = document.getElementById("user_name");
+        let InputPassword = document.getElementById("password_hash");
+        let InputRoleID = document.getElementById("role_id");
+        function Check(e) {
+            let nameRuler = /^[A-Za-z0-9]{4,20}$/;
+            let passwordRuler = /^[!-~]{4,10}$/;
+            let isValid = true;
+            $('#hintUserName').text('');
+            $('#hintPassword').text('');
+            if (!nameRuler.test(InputUserName.value)) {
+                $('#hintUserName').text("帳號需為4~20位英文、數字組成，不得含空格");
+                e.preventDefault();
+                isValid = false;
+            }
+            if (!passwordRuler.test(InputPassword.value)) {
+                $('#hintPassword').text("密碼需為4~10位英文、數字、符號組成，不得含空格");
+                e.preventDefault();
+                isValid = false;
+            }
+            if (isValid == true) {
+                SaveForm();
+            }
         }
-    }
-</script>
+
+        function SaveForm() {
+            sessionStorage.setItem("user_name", InputUserName.value)
+            sessionStorage.setItem("role_id", InputRoleID.value)
+        }
+        if (m) {
+            InputUserName.value = sessionStorage.getItem("user_name");
+            InputRoleID.value = sessionStorage.getItem("role_id");
+            alert(m);
+            if (s) {
+                sessionStorage.removeItem("user_name");
+                sessionStorage.removeItem("role_id");
+                window.location.href = '@Url.Action("Index")';
+            }
+        }
+    </script>
 
 }

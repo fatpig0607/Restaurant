@@ -2,6 +2,7 @@
 using BackOffice.Areas.Setting.Models.ViewModel;
 using BackOffice.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Text.RegularExpressions;
 
 namespace BackOffice.Areas.Setting.Models.Service
 {
@@ -82,14 +83,15 @@ namespace BackOffice.Areas.Setting.Models.Service
             {
                 if (!string.IsNullOrWhiteSpace(user.password_hash))
                 {
-                    if(user.password_hash.Length<4 || user.password_hash.Length > 10)
+                    if (!Regex.IsMatch(user.password_hash,@"\A[!-~]{4,10}\z"))
                     {
                         return new ServiceResult { success = false, message = "密碼需在4~10位數" };
                     }
                     u.password_hash = _passwordhasher.HashPassword(u, user.password_hash);
-                 }
+                }
+
                     u.status=user.status;
-                    u.updated_at = DateTime.UtcNow;
+                    u.updated_at = DateTime.Now;
                     u.role_id=user.role_id;
                     _dbContext.SaveChanges();
                     return new ServiceResult { success = true, message = "帳號更新成功" };
@@ -129,12 +131,15 @@ namespace BackOffice.Areas.Setting.Models.Service
             {
                 return null;
             }
-            else if (user.password_hash!=password)
+            var result = _passwordhasher.VerifyHashedPassword(user, user.password_hash, password);
+            if (result ==PasswordVerificationResult.Failed)
             {
                 return null;
             }
             else
             {
+                user.last_login_at=DateTime.Now;
+                _dbContext.SaveChanges();
                 return user;
             }
         }

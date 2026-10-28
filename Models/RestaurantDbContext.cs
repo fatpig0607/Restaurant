@@ -8,5 +8,7 @@ namespace BackOffice.Models
         public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options) : base(options) { }
         public DbSet<Role> roles  { get; set; }
         public DbSet<User> users { get; set; }
+        public DbSet<Permission> permissions { get; set; }
+        public DbSet<RolePermission> roles_permissions { get; set; }
     }
 }
