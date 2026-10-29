@@ -35,6 +35,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xSb2xlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/9. MVC/BackOffice/BackOffice/Areas/Setting/Views/Role/Permissions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xSb2xlXFBlcm1pc3Npb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/9. MVC/BackOffice/BackOffice/Areas/Setting/Views/User/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2V0dGluZ1xWaWV3c1xVc2VyXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

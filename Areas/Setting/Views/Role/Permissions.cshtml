@@ -1,0 +1,70 @@
+﻿@model BackOffice.Areas.Setting.Models.ViewModel.RolePermissionViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "權限設定";
+}
+<h1>權限設定</h1>
+<h4>角色設定: @Model.role_name </h4>
+<h5 class="my-3">角色管理</h5>
+<form asp-action="Permissions" asp-route-id="@Model.role_id" method="post">
+
+@foreach (var items in Model.permissions.Where(p => p.permission_code.StartsWith("Role.")))
+{
+    <div class="form-check @((items.permission_code.EndsWith(".View")) ? "" : "ms-4")">
+        <label for="permission_@items.permission_id" class="form-label" style="user-select:none;">@items.permission_name</label>
+        <input type="checkbox" 
+            class="form-check-input" 
+            id="permission_@items.permission_id" 
+            name="selected_permissions_ids"
+            data-group="@items.permission_code.Split(".")[0]" 
+            data-action="@items.permission_code.Split(".")[1]"
+            value="@items.permission_id" 
+            onchange="permissionChanged(this)"
+            checked="@Model.selected_permissions_ids.Contains(items.permission_id)" />
+    </div>
+}
+<h5 class="my-3">帳號管理</h5>
+@foreach (var items in Model.permissions.Where(p => p.permission_code.StartsWith("User.")))
+{
+    <div class="form-check @((items.permission_code.EndsWith(".View")) ? "" : "ms-4")">
+        <label for="permission_@items.permission_id" class="form-label" style="user-select:none;">@items.permission_name</label>
+        <input type="checkbox" 
+            class="form-check-input" 
+            id="permission_@items.permission_id" name="selected_permissions_ids"
+            data-group="@items.permission_code.Split(".")[0]" 
+            data-action="@items.permission_code.Split(".")[1]"
+            value="@items.permission_id" 
+            onchange="permissionChanged(this)"
+            checked="@Model.selected_permissions_ids.Contains(items.permission_id)" />
+    </div>
+}
+    <button type="submit" class="btn btn-primary">保存</button>
+</form>
+
+<div>
+    <a asp-action="Index">返回角色頁</a>
+</div>
+
+@section Scripts {
+    <script>
+        function permissionChanged(checkbox) {
+            let group = checkbox.dataset.group;
+            let action = checkbox.dataset.action;
+            if (action!="View" && checkbox.checked==true){
+                let ViewCheckbox = document.querySelector('input[data-group="'+group+'"][data-action="View"]');
+                if (ViewCheckbox!=null){
+                    ViewCheckbox.checked=true;
+                }
+            }
+            if(action=="View" && checkbox.checked==false){
+                let OtherCheckbox = document.querySelectorAll('input[data-group="'+group+'"]');
+                for(let item of OtherCheckbox){
+                    item.checked=false;
+                }
+            }
+
+        }
+
+    </script>
+}

@@ -46,7 +46,8 @@
                     @Html.DisplayFor(model => item.updated_at)
                 </td>
                 <td class="d-flex align-items-center">
-                    <a asp-action="Edit" asp-route-id="@item.role_id" class="btn btn-primary m-1">編輯</a>
+                    <a asp-action="Permissions" asp-route-id="@item.role_id" class="btn btn-primary m-1">權限設置</a>
+                    <a asp-action="Edit" asp-route-id="@item.role_id" class="btn btn-success m-1">編輯</a>
                     <form asp-action="Delete" asp-route-id="@item.role_id" method="post" onsubmit="send(event)">
                         <button type="submit" class="btn btn-danger">刪除</button>
                     </form>

@@ -70,5 +70,10 @@ namespace BackOffice.Areas.Setting.Controllers
             return View(rp);
 
         }
+        [HttpPost]
+        public IActionResult Permission(int id)
+        {
+
+        }
     }
 }
