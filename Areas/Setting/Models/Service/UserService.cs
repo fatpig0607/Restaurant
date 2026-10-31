@@ -143,5 +143,17 @@ namespace BackOffice.Areas.Setting.Models.Service
                 return user;
             }
         }
+
+        public List<string> GetPermissionCodes(int userId)
+        {
+            //帳號 ID → 查目前角色 → 查角色權限 → 取得權限代碼
+            var user = _dbContext.users.FirstOrDefault(u => u.user_id == userId && u.status==1);
+            if (user == null) { return new List<string>(); }
+            int? roleId=user.role_id;
+            if (roleId == null) { return new List<string>(); }
+            List<int> PermissionIds = _dbContext.roles_permissions.Where(rp=>rp.role_id==roleId).Select(p=>p.permission_id).ToList();
+            List<string> PermissionCodes = _dbContext.permissions.Where(p => PermissionIds.Contains(p.permission_id)).Select(p=>p.permission_code).ToList();
+            return PermissionCodes;
+        }
     }
 }

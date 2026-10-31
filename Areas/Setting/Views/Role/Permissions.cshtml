@@ -1,5 +1,5 @@
 ﻿@model BackOffice.Areas.Setting.Models.ViewModel.RolePermissionViewModel
-
+@using System.Text.Json;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "權限設定";
@@ -31,7 +31,8 @@
         <label for="permission_@items.permission_id" class="form-label" style="user-select:none;">@items.permission_name</label>
         <input type="checkbox" 
             class="form-check-input" 
-            id="permission_@items.permission_id" name="selected_permissions_ids"
+            id="permission_@items.permission_id" 
+            name="selected_permissions_ids"
             data-group="@items.permission_code.Split(".")[0]" 
             data-action="@items.permission_code.Split(".")[1]"
             value="@items.permission_id" 
@@ -42,7 +43,7 @@
     <button type="submit" class="btn btn-primary">保存</button>
 </form>
 
-<div>
+<div class="my-3">
     <a asp-action="Index">返回角色頁</a>
 </div>
 
@@ -63,7 +64,11 @@
                     item.checked=false;
                 }
             }
-
+        }
+        let s =@JsonSerializer.Serialize(TempData["Success"]);
+        let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+        if (m){
+            alert(m)
         }
 
     </script>

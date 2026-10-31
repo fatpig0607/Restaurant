@@ -6,11 +6,14 @@
 
 <h1>角色管理</h1>
 
-<p>
+    @if (ViewBag.permissionCodes.Contains("Role.Create")){
+        <p>
     <a asp-area="Setting"
    asp-controller="Role"
    asp-action="Create" class="btn btn-warning">新增</a>
 </p>
+    }
+
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +29,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.updated_at)
             </th>
-            <th>操作</th>
+            @if (ViewBag.permissionCodes.Contains("Role.Edit") || ViewBag.permissionCodes.Contains("Role.Delete"))
+            {
+                <th>操作</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -45,13 +51,22 @@
                 <td>
                     @Html.DisplayFor(model => item.updated_at)
                 </td>
+                @if (ViewBag.permissionCodes.Contains("Role.Edit") || ViewBag.permissionCodes.Contains("Role.Delete"))
+                {
                 <td class="d-flex align-items-center">
-                    <a asp-action="Permissions" asp-route-id="@item.role_id" class="btn btn-primary m-1">權限設置</a>
-                    <a asp-action="Edit" asp-route-id="@item.role_id" class="btn btn-success m-1">編輯</a>
-                    <form asp-action="Delete" asp-route-id="@item.role_id" method="post" onsubmit="send(event)">
-                        <button type="submit" class="btn btn-danger">刪除</button>
-                    </form>
+                    @if (ViewBag.permissionCodes.Contains("Role.Edit"))
+                    {
+                        <a asp-action="Permissions" asp-route-id="@item.role_id" class="btn btn-primary m-1">權限設置</a>
+                        <a asp-action="Edit" asp-route-id="@item.role_id" class="btn btn-success m-1">編輯</a>
+                    }
+                    @if (ViewBag.permissionCodes.Contains("Role.Delete"))
+                    {
+                        <form asp-action="Delete" asp-route-id="@item.role_id" method="post" onsubmit="send(event)">
+                            <button type="submit" class="btn btn-danger">刪除</button>
+                        </form>
+                    }
                 </td>
+                }
             </tr>
         }
     </tbody>

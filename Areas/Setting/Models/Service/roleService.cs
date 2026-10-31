@@ -108,5 +108,52 @@ namespace BackOffice.Areas.Setting.Models.Service
                 selected_permissions_ids = selectedIds
             };
         }
+
+        public ServiceResult SavePermissions(int Roleid, List<int> selectedPermissionIds)
+        {
+            if (!_dbContext.roles.Any(r => r.role_id == Roleid))
+            {
+                return new ServiceResult { success = false, message = "無此角色ID" };
+            }
+            var originPermissions = _dbContext.roles_permissions.Where(rp => rp.role_id == Roleid).ToList();//原權限物件
+            var PermissionsIds = selectedPermissionIds.Distinct().ToList();//新設定的權限清單
+            var RemovePermissions = originPermissions.Where(rp =>!PermissionsIds.Contains(rp.permission_id)).ToList();//從舊權限裡，挑出新名單已經沒有的那些資料，整理成清單
+            var AddPermissionsIds = PermissionsIds.Where(p=>!originPermissions.Any(rp=>rp.permission_id==p)).ToList();//從新名單挑；舊名單找不到，才留下來新增。
+
+            var existingIds = _dbContext.permissions.Select(p => p.permission_id).ToList();
+            if (PermissionsIds.Any(p => !existingIds.Contains(p)))
+            {
+                return new ServiceResult { success = false, message = "包含無效的權限" };
+            }
+            //檢查有沒有沒查詢權，但有操作權
+            var selectedCodes = _dbContext.permissions.Where(p => PermissionsIds.Contains(p.permission_id))
+                .Select(p=>p.permission_code).ToList();
+            bool hasRoleOperation = selectedCodes.Contains("Role.Create") || selectedCodes.Contains("Role.Edit") || selectedCodes.Contains("Role.Delete");
+            if (hasRoleOperation && !selectedCodes.Contains("Role.View"))
+            {
+                return new ServiceResult { success = false, message = "設定角色操作權時，需勾選角色查詢權" };
+            }
+            bool hasUserOperation = selectedCodes.Contains("User.Create") || selectedCodes.Contains("User.Edit") || selectedCodes.Contains("User.Delete");
+            if (hasUserOperation && !selectedCodes.Contains("User.View"))
+            {
+                return new ServiceResult { success = false, message = "設定帳號操作權時，需勾選帳號查詢權" };
+            }
+            foreach (var RemovePermission in RemovePermissions)
+            {
+                _dbContext.roles_permissions.Remove(RemovePermission);
+            }
+            foreach (var AddPermissionsId in AddPermissionsIds)
+            {
+                RolePermission rp = new RolePermission
+                {
+                    role_id = Roleid,
+                    permission_id=AddPermissionsId
+                };
+                _dbContext.roles_permissions.Add(rp);
+            }
+            _dbContext.SaveChanges();
+            return new ServiceResult { success = true, message = "已成功保存權限" };
+        }
+
     }
 }

@@ -13,5 +13,6 @@ namespace BackOffice.Areas.Setting.Models.Service.Repository
         IEnumerable<Role> GetRoles();
         IEnumerable<UserIndexViewModel> GetUserList();
         User? ValidateLogin(string username, string password);
+        List<string> GetPermissionCodes(int userId);
     }
 }

@@ -5,12 +5,14 @@
 }
 
 <h1>帳號管理</h1>
-
-<p>
-    <a asp-area="Setting"
-   asp-controller="User"
-   asp-action="Create" class="btn btn-warning">新增</a>
-</p>
+@if (ViewBag.permissionCodes.Contains("User.Create"))
+{
+    <p>
+        <a asp-area="Setting"
+       asp-controller="User"
+       asp-action="Create" class="btn btn-warning">新增</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -32,7 +34,11 @@
             <th>
                 @Html.DisplayNameFor(model=>model.role_name)
             </th>
-            <th>操作</th>
+            @if(ViewBag.permissionCodes.Contains("User.Edit") || ViewBag.permissionCodes.Contains("User.Delete"))
+            {
+                <th>操作</th>
+                
+            }
         </tr>
     </thead>
     <tbody>
@@ -68,12 +74,19 @@
                 <td>
                     @Html.DisplayFor(model=>item.role_name)
                 </td>
+                @if(ViewBag.permissionCodes.Contains("User.Edit") || ViewBag.permissionCodes.Contains("User.Delete"))
+                {
                 <td class="d-flex align-items-center">
-                    <a asp-action="Edit" asp-route-id="@item.user_id" class="btn btn-primary m-1">編輯</a>
-                    <form asp-action="Delete" asp-route-id="@item.user_id" method="post" onsubmit="send(event)">
-                        <button type="submit" class="btn btn-danger">刪除</button>
-                    </form>
+                    @if(ViewBag.permissionCodes.Contains("User.Edit")){
+                        <a asp-action="Edit" asp-route-id="@item.user_id" class="btn btn-primary m-1">編輯</a>
+                    }
+                    @if(ViewBag.permissionCodes.Contains("User.Delete")){
+                        <form asp-action="Delete" asp-route-id="@item.user_id" method="post" onsubmit="send(event)">
+                            <button type="submit" class="btn btn-danger">刪除</button>
+                        </form>
+                    }
                 </td>
+                }
             </tr>
         }
     </tbody>

@@ -12,6 +12,8 @@ namespace BackOffice.Areas.Setting.Models.Service.Repository
         ServiceResult Update(Role role);
         ServiceResult Delete(int id);
         RolePermissionViewModel? GetPermissions(int roleId);
+        ServiceResult SavePermissions(int Roleid, List<int> selectedPermissionIds);
+
     }
 
 }

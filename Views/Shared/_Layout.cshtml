@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@using BackOffice.Areas.Setting.Models.Service.Repository
+@inject IUserRepository UserService
+
+
+@{
+    List<string> permissionCodes = new();
+    if (User.Identity?.IsAuthenticated == true)
+    {
+        string? userIdText = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        // int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        if( int.TryParse(userIdText, out int userId))
+        {
+            permissionCodes = UserService.GetPermissionCodes(userId);
+        }
+    }
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,12 +43,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Setting" asp-controller="Role" asp-action="Index">角色管理</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Setting" asp-controller="User" asp-action="Index">帳號管理</a>
-                        </li>
+                        @if (permissionCodes.Contains("Role.View"))
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Setting" asp-controller="Role" asp-action="Index">角色管理</a>
+                            </li>
+                            }
+
+                        @if (permissionCodes.Contains("User.View"))
+                            {
+                                <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Setting" asp-controller="User" asp-action="Index">帳號管理</a>
+                                </li>
+                            }
                     </ul>
                     <div>
                         @if (User.Identity?.IsAuthenticated == true)
