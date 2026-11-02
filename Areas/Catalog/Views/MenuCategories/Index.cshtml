@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BackOffice.Areas.Catalog.Models.MenuCategories>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>餐點分類</h1>
+
+<p>
+    <a asp-area="Catalog"
+   asp-controller="MenuCategories"
+   asp-action="Create" class="btn btn-warning">新增</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.category_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sort)
+        </th>
+        <th>操作</th>
+    </tr>
+</thead>
+<tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model=>item.category_id)
+                </td>
+            <td>
+                @Html.DisplayFor(model => item.category_name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.sort)
+            </td>
+            <td class="d-flex align-items-center">
+                <a asp-action="Edit" asp-route-id="@item.category_id" class="btn btn-success m-1">編輯</a>
+                <form asp-action="Delete" asp-route-id="@item.category_id" method="post" onsubmit="">
+                            <button type="submit" class="btn btn-danger">刪除</button>
+                </form>
+            </td>
+            </tr>
+        }
+</tbody>
+
+</table>

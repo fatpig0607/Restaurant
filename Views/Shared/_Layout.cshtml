@@ -56,6 +56,9 @@
                                 <a class="nav-link text-dark" asp-area="Setting" asp-controller="User" asp-action="Index">帳號管理</a>
                                 </li>
                             }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Catalog" asp-controller="MenuCategories" asp-action="Index">餐點分類管理</a>
+                                </li>
                     </ul>
                     <div>
                         @if (User.Identity?.IsAuthenticated == true)

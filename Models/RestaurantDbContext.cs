@@ -1,4 +1,5 @@
-﻿using BackOffice.Areas.Setting.Models;
+﻿using BackOffice.Areas.Catalog.Models;
+using BackOffice.Areas.Setting.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackOffice.Models
@@ -10,5 +11,7 @@ namespace BackOffice.Models
         public DbSet<User> users { get; set; }
         public DbSet<Permission> permissions { get; set; }
         public DbSet<RolePermission> roles_permissions { get; set; }
+        public DbSet<MenuCategories> menu_categories { get; set; }
+        public DbSet<Menu> menu {  get; set; }
     }
 }

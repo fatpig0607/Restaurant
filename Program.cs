@@ -1,3 +1,6 @@
+using BackOffice.Areas.Catalog.Models;
+using BackOffice.Areas.Catalog.Models.Service;
+using BackOffice.Areas.Catalog.Models.Service.Repository;
 using BackOffice.Areas.Setting.Models;
 using BackOffice.Areas.Setting.Models.Service;
 using BackOffice.Areas.Setting.Models.Service.Repository;
@@ -13,6 +16,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("backoffice")));
 builder.Services.AddScoped<IRoleRepository, RoleService>();
 builder.Services.AddScoped<IUserRepository, UserService>();
+builder.Services.AddScoped<IMenuCategoriesRepository, MenuCategoriesService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
     AddCookie(options =>
     {
