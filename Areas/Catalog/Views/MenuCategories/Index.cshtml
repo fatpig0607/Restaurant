@@ -1,15 +1,19 @@
-﻿@model IEnumerable<BackOffice.Areas.Catalog.Models.MenuCategories>
+﻿@using System.Text.Json
+@model IEnumerable<BackOffice.Areas.Catalog.Models.MenuCategories>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>餐點分類</h1>
 
+@if (ViewBag.permissionCodes.Contains("MenuCategories.Create"))
+{
 <p>
     <a asp-area="Catalog"
    asp-controller="MenuCategories"
    asp-action="Create" class="btn btn-warning">新增</a>
 </p>
-<table class="table">
+}
+<table class="table text-center">
     <thead>
     <tr>
         <th>
@@ -21,7 +25,11 @@
         <th>
             @Html.DisplayNameFor(model => model.sort)
         </th>
-        <th>操作</th>
+            @if (ViewBag.permissionCodes.Contains("MenuCategories.Edit") || ViewBag.permissionCodes.Contains("MenuCategories.Delete"))
+            {
+                <th>操作</th>
+            }
+
     </tr>
 </thead>
 <tbody>
@@ -37,14 +45,37 @@
             <td>
                 @Html.DisplayFor(model => item.sort)
             </td>
-            <td class="d-flex align-items-center">
-                <a asp-action="Edit" asp-route-id="@item.category_id" class="btn btn-success m-1">編輯</a>
-                <form asp-action="Delete" asp-route-id="@item.category_id" method="post" onsubmit="">
-                            <button type="submit" class="btn btn-danger">刪除</button>
-                </form>
-            </td>
+                @if (ViewBag.permissionCodes.Contains("MenuCategories.Edit") || ViewBag.permissionCodes.Contains("MenuCategories.Delete"))
+                {
+                    
+                    <td class="d-flex align-items-center justify-content-center">
+                        @if (ViewBag.permissionCodes.Contains("MenuCategories.Edit"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.category_id" class="btn btn-success m-1">編輯</a>
+                        }
+                        @if (ViewBag.permissionCodes.Contains("MenuCategories.Delete"))
+                        {
+                            <form asp-action="Delete" asp-route-id="@item.category_id" method="post" onsubmit="send(event)">
+                                    <button type="submit" class="btn btn-danger" >刪除</button>
+                            </form>
+                        }
+                    </td>
+                }
             </tr>
         }
 </tbody>
 
 </table>
+@section Scripts{
+    <script>
+        let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+        if(m){
+            alert (m);
+        }
+        function send(e){
+            if(!confirm("確定要刪除嗎?")){
+                e.preventDefault();
+            }
+        }
+    </script>
+}

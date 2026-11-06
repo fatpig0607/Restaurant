@@ -1,0 +1,57 @@
+﻿@model BackOffice.Areas.Catalog.Models.MenuCategories
+@using System.Text.Json
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "編輯餐點分類";
+}
+<h4>編輯餐點分類</h4>
+<hr />
+<div class="row">
+    <form asp-action="Edit" method="POST" class="form" onsubmit="SaveForm(event)">
+        <div class="col-md-4">
+            <div>
+                <input type="hidden" asp-for="category_id"/>
+            </div>
+            <div class="my-3">
+                <label class="form-label" asp-for="category_name">餐點分類名稱</label>
+                <input class="form-control" type="text" asp-for="category_name" maxlength="50" required/>
+            </div>
+            <div class="my-3">
+                <label class="form-label" asp-for="sort">排序</label>
+                <input class="form-control" type="number" asp-for="sort" min="0" max="999" required/>
+            </div>
+            <div class="my-3">
+                <button class="btn btn-primary" type="submit">保存</button>
+            </div>
+        </div>
+    </form>
+    <div>
+    <a asp-action="Index">返回上一頁</a>
+</div>
+</div>
+@section Scripts{
+    <script>
+        let s = @(JsonSerializer.Serialize(TempData["Success"]));
+        let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+        let InputCategoryName = $("#category_name");
+        let InputSort = $("#sort");
+        function SaveForm(){
+            sessionStorage.setItem("category_name",InputCategoryName.val());
+            sessionStorage.setItem("sort",InputSort.val());
+        }
+        if (m){
+            InputCategoryName.val(sessionStorage.getItem("category_name"));
+            InputSort.val(sessionStorage.getItem("sort"));
+            alert (m);
+            if (s){
+                sessionStorage.removeItem("category_name");
+                sessionStorage.removeItem("sort");
+                window.location.href='@Url.Action("Index")';
+            }
+        }
+
+    </script>
+
+}

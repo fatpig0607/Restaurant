@@ -9,5 +9,6 @@ namespace BackOffice.Areas.Catalog.Models.Service.Repository
         public ServiceResult Create(MenuCategories menucategory);
         public ServiceResult Edit(MenuCategories menucategory);
         public ServiceResult Delete(int id);
+        public MenuCategories? GetById(int id);
     }
 }

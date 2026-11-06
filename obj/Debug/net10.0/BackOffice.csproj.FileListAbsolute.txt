@@ -135,3 +135,5 @@ C:\9. MVC\BackOffice\BackOffice\bin\Debug\net10.0\runtimes\win-x64\native\Micros
 C:\9. MVC\BackOffice\BackOffice\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\9. MVC\BackOffice\BackOffice\obj\Debug\net10.0\BackOffice.sourcelink.json
 C:\9. MVC\BackOffice\BackOffice\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\9. MVC\BackOffice\BackOffice\obj\Debug\net10.0\compressed\vo7ocvor72-{0}-uqu14flhyd-uqu14flhyd.gz
+C:\9. MVC\BackOffice\BackOffice\obj\Debug\net10.0\compressed\jr6o38o0w5-{0}-bthas3y4je-bthas3y4je.gz

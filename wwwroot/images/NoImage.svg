@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <rect width="150" height="150" fill="#f1f5f9"></rect>
+  <rect x="45" y="40" width="60" height="48" rx="6" fill="none" stroke="#94a3b8" stroke-width="3"></rect>
+  <circle cx="63" cy="55" r="6" fill="#94a3b8"></circle>
+  <path d="M48 83 L68 65 L81 76 L92 63 L102 83" fill="none" stroke="#94a3b8" stroke-width="3"></path>
+  <text x="75" y="115" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">
+    尚未選擇圖片
+  </text>
+</svg>

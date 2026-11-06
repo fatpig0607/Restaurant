@@ -56,9 +56,18 @@
                                 <a class="nav-link text-dark" asp-area="Setting" asp-controller="User" asp-action="Index">帳號管理</a>
                                 </li>
                             }
+                        @if (permissionCodes.Contains("MenuCategories.View"))
+                            {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Catalog" asp-controller="MenuCategories" asp-action="Index">餐點分類管理</a>
                                 </li>
+                            }
+                            @if (permissionCodes.Contains("Menu.View"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Catalog" asp-controller="Menu" asp-action="Index">餐點管理</a>
+                                    </li>
+                            }
                     </ul>
                     <div>
                         @if (User.Identity?.IsAuthenticated == true)

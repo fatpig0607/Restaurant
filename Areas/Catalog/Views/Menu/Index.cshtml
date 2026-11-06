@@ -1,0 +1,173 @@
+﻿@model IEnumerable<BackOffice.Areas.Catalog.Models.ViewModel.MenuViewModel>
+@using System.Text.Json
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "餐點";
+}
+<style>
+    .menu-table {
+    font-size: 1.0rem;
+}
+
+.menu-table > thead > tr > th {
+    background-color: #f3f5f7;
+    color: #596579;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.menu-table > tbody > tr > td {
+    padding: 1rem;
+    border-bottom-color: #eef0f3;
+}
+
+.menu-table > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+.menu-category-tabs {
+    gap: 0.5rem;
+    border-bottom: 0;
+    margin-bottom: 1rem;
+}
+
+.menu-category-tabs .nav-link {
+    padding: 0.6rem 1.2rem;
+    color: #475569;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.6rem;
+    margin-bottom: 0;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.menu-category-tabs .nav-link:hover {
+    color: #0d6efd;
+    background-color: #e7f1ff;
+    border-color: #b6d4fe;
+}
+
+.menu-category-tabs .nav-link.active {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+.menuimg{
+    width:150px;
+    height:150px;
+    object-fit:contain;
+}
+</style>
+<div class="mb-4">
+    <h1 class="h3 fw-bold mb-1">餐點管理</h1>
+</div>
+<ul class="nav nav-tabs menu-category-tabs">
+  <li class="nav-item">
+    <a class="nav-link @(ViewBag.SelectedCategoryId==0?"active":"")" asp-action="Index" asp-route-id="">全部</a>
+  </li>
+    @foreach (var category in ViewBag.CategoryList)
+    {
+        <li class="nav-item">
+        <a class="nav-link @(category.category_id==ViewBag.SelectedCategoryId?"active":"")" asp-action="Index" asp-route-id="@category.category_id">@category.category_name</a>
+        </li>
+    }
+  </ul>
+@if (ViewBag.permissionCodes.Contains("Menu.Create"))
+{
+    <p>
+        <a asp-area="Catalog"
+           asp-controller="Menu"
+           asp-action="Create" class="btn btn-warning">新增</a>
+    </p>
+}
+<div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle text-center mb-0 menu-table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.menu_id)</th>
+                    <th>@Html.DisplayNameFor(model => model.category_name)</th>
+                    <th>@Html.DisplayNameFor(model => model.menu_name)</th>
+                    <th>@Html.DisplayNameFor(model => model.menu_description)</th>
+                    <th>@Html.DisplayNameFor(model => model.menu_img)</th>
+                    <th>@Html.DisplayNameFor(model => model.price)</th>
+                    <th>@Html.DisplayNameFor(model => model.status)</th>
+                    <th>@Html.DisplayNameFor(model => model.sort)</th>
+                    <th>@Html.DisplayNameFor(model => model.created_at)</th>
+                    <th>@Html.DisplayNameFor(model => model.updated_at)</th>
+                    @if (ViewBag.permissionCodes.Contains("Menu.Edit")||ViewBag.permissionCodes.Contains("Menu.Delete"))
+                    {
+                        <th>操作</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr class="@(item.status==0?"table-secondary":"")">
+                        <td>@Html.DisplayFor(model => item.menu_id)</td>
+                        <td>@Html.DisplayFor(model => item.category_name)</td>
+                        <td>@Html.DisplayFor(model => item.menu_name)</td>
+                        <td>@Html.DisplayFor(model => item.menu_description)</td>
+                       <td> 
+                           @if (!string.IsNullOrWhiteSpace(item.menu_img))
+                                {
+                                    <img src="@item.menu_img" class="menuimg"/>                            
+                            }
+                            else
+                            {
+                                <div class="menuimg"></div>
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(model => item.price)</td>
+                        <td class="text-nowrap">
+                        @if(item.status==1){
+                                    @:販售中
+                                }
+                                else
+                                {
+                                    @:停售
+                                }
+                        </td>
+                        <td>@Html.DisplayFor(model => item.sort)</td>
+                        <td class="">@Html.DisplayFor(model => item.created_at)</td>
+                        <td>@Html.DisplayFor(model => item.updated_at)</td>
+                        @if (ViewBag.permissionCodes.Contains("Menu.Edit") || ViewBag.permissionCodes.Contains("Menu.Delete"))
+                        {
+                            
+                        <td class="text-nowrap">
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                @if (ViewBag.permissionCodes.Contains("Menu.Edit"))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.menu_id" class="btn btn-success">編輯</a>
+                                }
+                                @if (ViewBag.permissionCodes.Contains("Menu.Delete"))
+                                {
+                                    <form asp-action="Delete" asp-route-id="@item.menu_id" method="post" onsubmit="send(event)">
+                                        <button type="submit" class="btn btn-danger text-nowrap" >刪除</button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function send (e){
+            if(!confirm("確定要刪除此餐點嗎?")){
+                e.preventDefault();
+            }
+        }
+        let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+        if(m){
+            alert(m);
+        }
+    </script>
+
+}

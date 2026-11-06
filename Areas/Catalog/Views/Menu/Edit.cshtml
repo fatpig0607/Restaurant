@@ -1,0 +1,119 @@
+﻿@model BackOffice.Areas.Catalog.Models.Menu
+@using System.Text.Json
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "編輯餐點";
+}
+<h4>編輯餐點</h4>
+<hr />
+<form asp-action="Edit" method="post" enctype="multipart/form-data" onsubmit="SaveForm(event)" >
+    <input type="hidden" asp-for="menu_id"/>
+    <input type="hidden" name="removeImage" id="removeImage" value="false"/>
+    <div class="col-md-4">
+        <div class="my-3">
+            <label asp-for="category_id" class="form-label">餐點分類<span style="color:red;">*</span></label>
+            <select asp-for="category_id" class="form-select" asp-items="ViewBag.CategoryList" required>
+                <option value="" disabled selected>請選擇餐點分類</option>
+            </select>
+        </div>
+        <div class="my-3">
+            <label asp-for="menu_name" class="form-label">餐點名稱<span style="color:red;">*</span></label>
+            <input asp-for="menu_name" type="text" class="form-control" required maxlength="50"/>
+        </div>
+        <div class="my-3">
+            <label asp-for="menu_description" class="form-label">餐點描述</label>
+            <input asp-for="menu_description" type="text" class="form-control" maxlength="100"/>
+        </div>
+        <div class="my-3">
+            <label asp-for="price" class="form-label">價格<span style="color:red;">*</span></label>
+            <input asp-for="price" type="number" class="form-control" required min="0"/>
+        </div>
+        <div class="my-3">
+            <label asp-for="status" class="form-label">狀態<span style="color:red;">*</span></label>
+            <select asp-for="status" class="form-select">
+                <option value="1">販售中</option>
+                <option value="0">停售</option>
+            </select>
+         </div>
+        <div class="my-3">
+            <label asp-for="sort" class="form-label">排序<span style="color:red;">*</span></label>
+            <input asp-for="sort" type="number" class="form-control" required/>
+        </div>
+        <div class="my-3">
+            <label for="menuImage" class="form-label">餐點圖片</label>
+            <input id="menuImage" name="menuImage" type="file" class="form-control" accept="image/jpeg,image/png,image/webp"/>
+        </div>
+        @if (Model.menu_img == null)
+            {
+                <img src="~/images/NoImage.svg" alt="餐點圖片預覽" id="menuImagePreview" style="width:150px;height:150px;object-fit:cover" class="border rounded my-3"/>
+            }
+            else
+            {
+            <img src="@Model.menu_img" alt="餐點圖片預覽" id="menuImagePreview" style="width:150px;height:150px;object-fit:cover" class="border rounded my-3" />
+            }
+            <button class="btn btn-outline-danger" id="clearMenuImage" type="button" >清空圖片</button>
+        <div>
+            <input type="submit" class="btn btn-primary" value="保存" />
+        </div>
+    </div>
+</form>
+<div class="my-3">
+    <a asp-action="Index">返回上一頁</a>
+</div>
+
+@section Scripts{
+    <script>
+        let menuImage = $('#menuImage');
+        let menuImagePreview = $('#menuImagePreview');
+        let clearMenuImage = $('#clearMenuImage');
+        let defaultImageUrl = "/images/NoImage.svg"
+        menuImage.on('change',function(){
+            let file = this.files[0];
+            if(!file){
+                return ;
+            }
+            $('#removeImage').val('false');
+            let reader = new FileReader();
+            reader.onload=function(e){
+                menuImagePreview.attr('src',e.target.result);
+            }
+            reader.readAsDataURL(file)
+        })
+        clearMenuImage.on('click',function(){
+            menuImage.val('');
+            $('#removeImage').val('true');
+            menuImagePreview.attr('src',defaultImageUrl);
+        })
+        let s =@(JsonSerializer.Serialize(TempData["Success"]));
+        let m = @Html.Raw(JsonSerializer.Serialize(TempData["Message"]));
+         function SaveForm(){
+            sessionStorage.setItem("category_id",$('#category_id').val());
+            sessionStorage.setItem("menu_name",$('#menu_name').val());
+            sessionStorage.setItem("menu_description",$('#menu_description').val());
+            sessionStorage.setItem("price",$('#price').val());
+            sessionStorage.setItem("status",$('#status').val());
+            sessionStorage.setItem("sort",$('#sort').val());
+        }
+        if(m){
+            alert(m);
+            if(s){
+            sessionStorage.removeItem("category_id");
+            sessionStorage.removeItem("menu_name");
+            sessionStorage.removeItem("menu_description");
+            sessionStorage.removeItem("price");
+            sessionStorage.removeItem("status");
+            sessionStorage.removeItem("sort");
+                window.location.href='@Url.Action("Index")';
+            }else{
+             $('#category_id').val(sessionStorage.getItem("category_id"))
+            $('#menu_name').val(sessionStorage.getItem("menu_name"))
+            $('#menu_description').val(sessionStorage.getItem("menu_description"))
+            $('#price').val(sessionStorage.getItem("price"))
+            $('#status').val(sessionStorage.getItem("status"))
+            $('#sort').val(sessionStorage.getItem("sort"));
+            }
+        }
+    </script>
+
+}

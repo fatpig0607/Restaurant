@@ -138,6 +138,16 @@ namespace BackOffice.Areas.Setting.Models.Service
             {
                 return new ServiceResult { success = false, message = "設定帳號操作權時，需勾選帳號查詢權" };
             }
+            bool hasMenuCategoriesOperation = selectedCodes.Contains("MenuCategories.Create") || selectedCodes.Contains("MenuCategories.Edit") || selectedCodes.Contains("MenuCategories.Delete");
+            if (hasMenuCategoriesOperation && !selectedCodes.Contains("MenuCategories.View"))
+            {
+                return new ServiceResult { success = false, message = "設定餐點分類操作權時，需勾選餐點分類查詢權" };
+            }
+            bool hasMenuOperation = selectedCodes.Contains("Menu.Create") || selectedCodes.Contains("Menu.Edit") || selectedCodes.Contains("Menu.Delete");
+            if (hasMenuOperation && !selectedCodes.Contains("Menu.View"))
+            {
+                return new ServiceResult { success = false, message = "設定餐點操作權時，需勾選餐點查詢權" };
+            }
             foreach (var RemovePermission in RemovePermissions)
             {
                 _dbContext.roles_permissions.Remove(RemovePermission);

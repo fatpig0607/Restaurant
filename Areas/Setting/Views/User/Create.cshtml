@@ -2,15 +2,13 @@
 @model BackOffice.Areas.Setting.Models.User
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "新增帳號";
 }
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>User</h4>
+<h4>新增帳號</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -31,8 +29,8 @@
 
             <div class="my-3">
                 <label asp-for="role_id" class="form-label">角色</label>
-                <select asp-for="role_id" class="form-select" asp-items="ViewBag.RoleList">
-                    <option value="" hidden>請選擇角色</option>
+                <select asp-for="role_id" class="form-select" asp-items="ViewBag.RoleList" required>
+                    <option value="" selected disabled>請選擇角色</option>
                 </select>
                 <span asp-validation-for="role_id" class="text-danger"></span>
             </div>
@@ -44,7 +42,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回上一頁</a>
 </div>
 @section Scripts {
     <script>
