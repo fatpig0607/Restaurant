@@ -1,7 +1,5 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
-wwwroot\images\NoImage.svg
-wwwroot\images\NoUploadImage.svg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -63,12 +61,14 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\uploads\menu\ebe81606806b454baa934e00fb380b08.png
+wwwroot\uploads\menu\a2a8bf30bf804a13b1c3e2e1453aaf3b.jpg
+wwwroot\uploads\menu\e3dc4493ebf14362ba308c4f8fffbcbd.png
+wwwroot\images\NoUploadImage.svg
+wwwroot\uploads\menu\cf71e04742cb4f6980ce77660d28d394.jpg
 wwwroot\uploads\menu\1a1cc3c71c584180901594675ed3f66c.png
 wwwroot\uploads\menu\6a9b217774d14e1ea189be9e1cc438be.jpg
-wwwroot\uploads\menu\a2a8bf30bf804a13b1c3e2e1453aaf3b.jpg
-wwwroot\uploads\menu\cf71e04742cb4f6980ce77660d28d394.jpg
-wwwroot\uploads\menu\e3dc4493ebf14362ba308c4f8fffbcbd.png
-wwwroot\uploads\menu\ebe81606806b454baa934e00fb380b08.png
+wwwroot\images\NoImage.svg
 C:\9. MVC\BackOffice\BackOffice\wwwroot\css\site.css
 C:\9. MVC\BackOffice\BackOffice\wwwroot\favicon.ico
 C:\9. MVC\BackOffice\BackOffice\wwwroot\js\site.js
@@ -131,5 +131,5 @@ C:\9. MVC\BackOffice\BackOffice\wwwroot\lib\jquery\dist\jquery.slim.js
 C:\9. MVC\BackOffice\BackOffice\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\9. MVC\BackOffice\BackOffice\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\9. MVC\BackOffice\BackOffice\wwwroot\lib\jquery\LICENSE.txt
-C:\9. MVC\BackOffice\BackOffice\wwwroot\images\NoImage.svg
 C:\9. MVC\BackOffice\BackOffice\wwwroot\images\NoUploadImage.svg
+C:\9. MVC\BackOffice\BackOffice\wwwroot\images\NoImage.svg

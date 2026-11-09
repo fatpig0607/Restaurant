@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "ContainingType": "BackOffice.Areas.Catalog.Controllers.MenuApiController",
+    "Method": "GetMenu",
+    "RelativePath": "api/menu",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
