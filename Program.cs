@@ -1,6 +1,7 @@
 using BackOffice.Areas.Catalog.Models;
 using BackOffice.Areas.Catalog.Models.Service;
 using BackOffice.Areas.Catalog.Models.Service.Repository;
+using BackOffice.Areas.Order.Models.Service;
 using BackOffice.Areas.Setting.Models;
 using BackOffice.Areas.Setting.Models.Service;
 using BackOffice.Areas.Setting.Models.Service.Repository;
@@ -18,6 +19,7 @@ builder.Services.AddScoped<IRoleRepository, RoleService>();
 builder.Services.AddScoped<IUserRepository, UserService>();
 builder.Services.AddScoped<IMenuCategoriesRepository, MenuCategoriesService>();
 builder.Services.AddScoped<IMenuRepository, MenuService>();
+builder.Services.AddScoped<OrderService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
     AddCookie(options =>
     {

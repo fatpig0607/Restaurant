@@ -8,9 +8,11 @@ namespace BackOffice.Areas.Catalog.Controllers
     public class MenuApiController : ControllerBase
     {
         private IMenuRepository _menu;
-        public MenuApiController(IMenuRepository menu)
+        private IMenuCategoriesRepository _menucategory;
+        public MenuApiController(IMenuRepository menu, IMenuCategoriesRepository menucategory)
         {
             _menu = menu;
+            _menucategory = menucategory;
         }
         [HttpGet("menu")]
         public IActionResult GetMenu()
@@ -26,6 +28,12 @@ namespace BackOffice.Areas.Catalog.Controllers
                 imgurl = item.menu_img
             }).ToList();
 
+            return Ok(q);
+        }
+        [HttpGet("menucategories")]
+        public IActionResult GetMenuCategories()
+        {
+            var q = _menucategory.GetAll();
             return Ok(q);
         }
     }

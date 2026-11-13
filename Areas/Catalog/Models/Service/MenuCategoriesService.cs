@@ -10,7 +10,7 @@ namespace BackOffice.Areas.Catalog.Models.Service
         {
             _dbContext = dbContext;
         }
-        public System.Collections.Generic.IEnumerable<MenuCategories> GetAll()
+        public IEnumerable<MenuCategories> GetAll()
         {
             var q = _dbContext.menu_categories.OrderBy(c=>c.sort).ThenBy(c=>c.category_id).ToList();
             return (q);    
@@ -46,8 +46,10 @@ namespace BackOffice.Areas.Catalog.Models.Service
             if (q == null)
             {
                 return new ServiceResult { success = false, message = "無指定分類編號" };
-            }
-            else
+            }else if (_dbContext.menu.Any(m=>m.category_id==id ))
+            {
+                return new ServiceResult { success = false, message = "指定餐點分類仍有餐點，無法刪除" };
+            }else
             {
                 _dbContext.menu_categories.Remove(q);
                 _dbContext.SaveChanges();

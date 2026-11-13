@@ -8,5 +8,31 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackOffice.Areas.Catalog.Controllers.MenuApiController",
+    "Method": "GetMenuCategories",
+    "RelativePath": "api/menucategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackOffice.Areas.Order.Controllers.OrderApiController",
+    "Method": "Create",
+    "RelativePath": "api/order",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "BackOffice.Areas.Order.Models.Request.CreateOrderRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

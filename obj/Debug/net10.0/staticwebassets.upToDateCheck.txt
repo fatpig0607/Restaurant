@@ -69,6 +69,9 @@ wwwroot\uploads\menu\cf71e04742cb4f6980ce77660d28d394.jpg
 wwwroot\uploads\menu\1a1cc3c71c584180901594675ed3f66c.png
 wwwroot\uploads\menu\6a9b217774d14e1ea189be9e1cc438be.jpg
 wwwroot\images\NoImage.svg
+wwwroot\uploads\menu\ebed39e8ff0e48bbaa008fb82f615c78.webp
+wwwroot\uploads\menu\e3e7fcc79bef4d8eb5d1694b66ad0e64.jpg
+wwwroot\uploads\menu\e32aec1e65a443b3ae8080f8ef2c227e.jpg
 C:\9. MVC\BackOffice\BackOffice\wwwroot\css\site.css
 C:\9. MVC\BackOffice\BackOffice\wwwroot\favicon.ico
 C:\9. MVC\BackOffice\BackOffice\wwwroot\js\site.js
