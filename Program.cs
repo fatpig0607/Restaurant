@@ -19,7 +19,7 @@ builder.Services.AddScoped<IRoleRepository, RoleService>();
 builder.Services.AddScoped<IUserRepository, UserService>();
 builder.Services.AddScoped<IMenuCategoriesRepository, MenuCategoriesService>();
 builder.Services.AddScoped<IMenuRepository, MenuService>();
-builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<OrderApiService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
     AddCookie(options =>
     {

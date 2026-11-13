@@ -9,8 +9,8 @@ namespace BackOffice.Areas.Order.Controllers
     [Route("api")]
     public class OrderApiController : ControllerBase
     {
-        private OrderService _orderservice;
-        public OrderApiController(OrderService orderservice)
+        private OrderApiService _orderservice;
+        public OrderApiController(OrderApiService orderservice)
         {
             _orderservice = orderservice;
         }

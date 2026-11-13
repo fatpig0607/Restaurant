@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackOffice.Areas.Order.Models.Service
 {
-    public class OrderService
+    public class OrderApiService
     {
         private RestaurantDbContext _dbContext;
-        public OrderService(RestaurantDbContext dbContext)
+        public OrderApiService(RestaurantDbContext dbContext)
         {
             _dbContext = dbContext;
         }

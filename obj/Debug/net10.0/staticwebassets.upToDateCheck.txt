@@ -1,5 +1,7 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\NoImage.svg
+wwwroot\images\NoUploadImage.svg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -61,17 +63,22 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\uploads\menu\ebe81606806b454baa934e00fb380b08.png
-wwwroot\uploads\menu\a2a8bf30bf804a13b1c3e2e1453aaf3b.jpg
-wwwroot\uploads\menu\e3dc4493ebf14362ba308c4f8fffbcbd.png
-wwwroot\images\NoUploadImage.svg
-wwwroot\uploads\menu\cf71e04742cb4f6980ce77660d28d394.jpg
 wwwroot\uploads\menu\1a1cc3c71c584180901594675ed3f66c.png
+wwwroot\uploads\menu\4fc267b6ce1a4961af34deec6a94873c.jpg
+wwwroot\uploads\menu\55a3bf836bd3486e8e767c0f51d61510.jpg
+wwwroot\uploads\menu\5e7ee22e419446af8f5dcf1869724e06.jpg
 wwwroot\uploads\menu\6a9b217774d14e1ea189be9e1cc438be.jpg
-wwwroot\images\NoImage.svg
-wwwroot\uploads\menu\ebed39e8ff0e48bbaa008fb82f615c78.webp
-wwwroot\uploads\menu\e3e7fcc79bef4d8eb5d1694b66ad0e64.jpg
+wwwroot\uploads\menu\949175a259014b209bbc8bf93d85a67a.jpg
+wwwroot\uploads\menu\99d14745c1cb4021a905b754f1640841.webp
+wwwroot\uploads\menu\a2a8bf30bf804a13b1c3e2e1453aaf3b.jpg
+wwwroot\uploads\menu\c313843d52354e4d8c091d774eb20b40.jpg
+wwwroot\uploads\menu\ceb570e205254b22bd0e8a8ca653d928.jpg
+wwwroot\uploads\menu\cf71e04742cb4f6980ce77660d28d394.jpg
 wwwroot\uploads\menu\e32aec1e65a443b3ae8080f8ef2c227e.jpg
+wwwroot\uploads\menu\e3dc4493ebf14362ba308c4f8fffbcbd.png
+wwwroot\uploads\menu\e3e7fcc79bef4d8eb5d1694b66ad0e64.jpg
+wwwroot\uploads\menu\ebe81606806b454baa934e00fb380b08.png
+wwwroot\uploads\menu\ebed39e8ff0e48bbaa008fb82f615c78.webp
 C:\9. MVC\BackOffice\BackOffice\wwwroot\css\site.css
 C:\9. MVC\BackOffice\BackOffice\wwwroot\favicon.ico
 C:\9. MVC\BackOffice\BackOffice\wwwroot\js\site.js
