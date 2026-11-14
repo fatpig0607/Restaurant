@@ -3,5 +3,6 @@
     public interface IOrderRepository
     {
         public IEnumerable<Order> GetAll();
+        public IEnumerable<OrderItem> Detail(string id);
     }
 }

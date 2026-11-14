@@ -86,7 +86,7 @@
         <table class="table table-hover align-middle text-center mb-0 menu-table">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.menu_id)</th>
+                    @* <th>@Html.DisplayNameFor(model => model.menu_id)</th> *@
                     <th>@Html.DisplayNameFor(model => model.category_name)</th>
                     <th>@Html.DisplayNameFor(model => model.menu_name)</th>
                     <th>@Html.DisplayNameFor(model => model.menu_description)</th>
@@ -106,7 +106,7 @@
                 @foreach(var item in Model)
                 {
                     <tr class="@(item.status==0?"table-secondary":"")">
-                        <td>@Html.DisplayFor(model => item.menu_id)</td>
+                        @* <td>@Html.DisplayFor(model => item.menu_id)</td> *@
                         <td>@Html.DisplayFor(model => item.category_name)</td>
                         <td>@Html.DisplayFor(model => item.menu_name)</td>
                         <td>@Html.DisplayFor(model => item.menu_description)</td>
@@ -120,7 +120,7 @@
                                 <div class="menuimg"></div>
                             }
                         </td>
-                        <td>@Html.DisplayFor(model => item.price)</td>
+                        <td>NT$@Html.DisplayFor(model => item.price)</td>
                         <td class="text-nowrap">
                         @if(item.status==1){
                                     @:販售中

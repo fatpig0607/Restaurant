@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Order>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "訂單";
+}
+
+<div class="mb-4">
+    <h1 class="h3 fw-bold mb-1">訂單查詢</h1>
+</div>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m=>m.order_id)</th>
+                <th>@Html.DisplayNameFor(m=>m.total_price)</th>
+                <th>@Html.DisplayNameFor(m => m.created_at)</th>
+                @if (ViewBag.permissionCodes.Contains("Order.Detail"))
+                {
+                    <th>操作</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.order_id)</td>
+                    <td>NT$ @Html.DisplayFor(m => item.total_price)</td>
+                    <td>@Html.DisplayFor(m => item.created_at)</td>
+                    @if (ViewBag.permissionCodes.Contains("Order.Detail"))
+                    {
+                    <td>
+                        <a class="btn btn-warning" asp-action="Detail" asp-route-id="@item.order_id">訂單詳情</a>
+                    </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

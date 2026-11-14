@@ -1,0 +1,40 @@
+﻿@model IEnumerable<OrderItem>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "訂單詳情";
+}
+<div class="mb-4">
+    <h1 class="h3 fw-bold mb-1">訂單詳情：@Model.FirstOrDefault()?.order_id</h1>
+</div>
+
+<div>
+    <table class="table">
+    <thead>
+        <tr>
+                <th>@Html.DisplayNameFor(m => m.menu_name)</th>
+                <th>@Html.DisplayNameFor(m => m.price)</th>
+                <th>@Html.DisplayNameFor(m => m.quantity)</th>
+                <th>小計</th>
+        </tr>
+    </thead>
+    <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.menu_name</td>
+                        <td>@item.price</td>
+                        <td>@item.quantity</td>
+                        <td>NT$@(item.price*item.quantity)</td>
+                    </tr>
+                }
+            <tr>
+                <td colspan="3">總計</td>
+                <td class="text-danger">NT$@Model.Sum(m=>m.price*m.quantity)</td>
+            </tr>
+            </tbody>
+</table>
+</div>
+    <div class="my-3">
+        <a asp-action="Index">返回上一頁</a>
+    </div>
